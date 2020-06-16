@@ -132,12 +132,12 @@
                 game.load.image('cursor4', ASSET_URL + 'cursors/cursor4.png');
                 game.load.image('cursor5', ASSET_URL + 'cursors/cursor5.png');
 
-                var cold = this.add.sprite(100, 300, ASSET_URL + 'microbes/cold.png');
-                var mono = this.add.sprite(300, 300, ASSET_URL + 'microbes/mono.png');
-                var herpes = this.add.sprite(500, 300, ASSET_URL + 'microbes/herpes.png');
-                var sars = this.add.sprite(650, 300, ASSET_URL +'microbes/sars.png');
-                var measles = this.add.sprite(850, 300,ASSET_URL + 'microbes/measles.png');
-
+              game.load.image('cold',  ASSET_URL + 'microbes/cold.png');
+              game.load.image('herper',  ASSET_URL + 'microbes/herpes.png');
+              game.load.image('mono',  ASSET_URL + 'microbes/mono.png');
+              game.load.image('measles',  ASSET_URL + 'microbes/measles.png');
+              game.load.image('sars',  ASSET_URL + 'microbes/sars.png');
+              game.load.image('herpes',  ASSET_URL + 'microbes/herpes.png');
 
             }
 
@@ -164,6 +164,29 @@
 
                 game.camera.x = player.sprite.x - WINDOW_WIDTH/2;
                 game.camera.y = player.sprite.y - WINDOW_HEIGHT/2;
+
+                //add microbes
+
+                var cold = game.add.sprite(100, 300, 'cold');
+                cold.inputEnabled = true;
+                cold.input.enableDrag(true);
+
+
+                var mono = game.add.sprite(300, 300, 'mono');
+                mono.inputEnabled = true;
+                mono.input.enableDrag(true);
+
+                var herpes = game.add.sprite(500, 300, 'herpes');
+                herpes.inputEnabled = true;
+                herpes.input.enableDrag(true);
+
+                var sars = game.add.sprite(650, 300, 'sars');
+                sars.inputEnabled = true;
+                sars.input.enableDrag(true);
+
+                var measles = game.add.sprite(850, 300, 'measles');
+                measles.inputEnabled = true;
+                measles.input.enableDrag(true);
 
                 socket = io(); // This triggers the 'connection' event on the server
                 socket.emit('new-player',{x:player.sprite.x,y:player.sprite.y,angle:player.sprite.rotation,type:1})
