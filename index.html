@@ -4,6 +4,8 @@
         <title>Multiplayer Experiment</title>
         <!-- Load the Phaser game library -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.4.2/phaser.min.js"></script>
+
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
         <!-- Load the Socket.io networking library -->
         <script src="/socket.io/socket.io.js"></script>
 
@@ -13,9 +15,12 @@
                 margin: 0px;
                 position: relative;
                 background-color:#2e2e2e;
+                color: #ffffff;
             }
             canvas { /* Center the canvas */
                 margin:auto;
+                color: #ffffff;
+                font-family: "Press Start 2P"; 
                 /*border: 1px solid black;*/
             }
         </style>
@@ -29,6 +34,13 @@
             var WINDOW_WIDTH = 1024;
             var WINDOW_HEIGHT = 800;
             var game = new Phaser.Game(WINDOW_WIDTH, WINDOW_HEIGHT, Phaser.AUTO, '', {preload:preload, create:create, update:GameLoop} );
+
+            var measlesMatch = false;
+            var monoMatch = false;
+            var coldMatch = false;
+            var sarsMatch = false;
+            var herpesMatch = false;
+
 
             var WORLD_SIZE = {w:1024,h:800};
 
@@ -133,7 +145,6 @@
                 game.load.image('cursor5', ASSET_URL + 'cursors/cursor5.png');
 
               game.load.image('cold',  ASSET_URL + 'microbes/cold.png');
-              game.load.image('herper',  ASSET_URL + 'microbes/herpes.png');
               game.load.image('mono',  ASSET_URL + 'microbes/mono.png');
               game.load.image('measles',  ASSET_URL + 'microbes/measles.png');
               game.load.image('sars',  ASSET_URL + 'microbes/sars.png');
@@ -187,6 +198,16 @@
                 var measles = game.add.sprite(850, 300, 'measles');
                 measles.inputEnabled = true;
                 measles.input.enableDrag(true);
+
+                //text
+                this.add.text(WINDOW_WIDTH/2, 100, 'Match the Microbe', { fontFamily: '"Press Start 2P"' });
+
+
+                this.add.text(50, 400, 'measles', { fontFamily: '"Press Start 2P"' });
+                this.add.text(250, 400, 'herpes', { fontFamily: '"Press Start 2P"' });
+                this.add.text(450, 400, 'sars', { fontFamily: '"Press Start 2P"' });
+                this.add.text(600, 400, 'mono', { fontFamily: '"Press Start 2P"' });
+                this.add.text(750, 400, 'common cold', { fontFamily: '"Press Start 2P"' });
 
                 socket = io(); // This triggers the 'connection' event on the server
                 socket.emit('new-player',{x:player.sprite.x,y:player.sprite.y,angle:player.sprite.rotation,type:1})
