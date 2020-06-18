@@ -20,7 +20,7 @@
             canvas { /* Center the canvas */
                 margin:auto;
                 color: #ffffff;
-                font-family: "Press Start 2P"; 
+                font-family: "Press Start 2P";
                 /*border: 1px solid black;*/
             }
         </style>
@@ -200,14 +200,14 @@
                 measles.input.enableDrag(true);
 
                 //text
-                this.add.text(WINDOW_WIDTH/2, 100, 'Match the Microbe', { fontFamily: '"Press Start 2P"' });
+                this.add.text(250, 100, 'Match the Microbe', { fontFamily: 'Press Start 2P', fill: '#ffffff', fontSize: '64px'  });
 
 
-                this.add.text(50, 400, 'measles', { fontFamily: '"Press Start 2P"' });
-                this.add.text(250, 400, 'herpes', { fontFamily: '"Press Start 2P"' });
-                this.add.text(450, 400, 'sars', { fontFamily: '"Press Start 2P"' });
-                this.add.text(600, 400, 'mono', { fontFamily: '"Press Start 2P"' });
-                this.add.text(750, 400, 'common cold', { fontFamily: '"Press Start 2P"' });
+                this.add.text(50, 400, 'measles', { fontFamily: "Press Start 2P", fill: '#ffffff' });
+                this.add.text(250, 400, 'herpes', { fontFamily: "Press Start 2P", fill: '#ffffff'   });
+                this.add.text(450, 400, 'sars', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
+                this.add.text(600, 400, 'mono', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
+                this.add.text(750, 400, 'common cold', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
 
                 socket = io(); // This triggers the 'connection' event on the server
                 socket.emit('new-player',{x:player.sprite.x,y:player.sprite.y,angle:player.sprite.rotation,type:1})
