@@ -41,6 +41,18 @@
             var sarsMatch = false;
             var herpesMatch = false;
 
+            var measles;
+            var mono;
+            var cold;
+            var sars;
+            var herpes;
+
+            var measlesPlace;
+            var monoPlace;
+            var coldPlace;
+            var sarsPlace;
+            var herpesPlace;
+
 
             var WORLD_SIZE = {w:1024,h:800};
 
@@ -99,6 +111,13 @@
                 return sprite;
             }
 
+            function checkOverlap(spriteA, spriteB) {
+              var boundsA = spriteA.getBounds();
+              var boundsB = spriteB.getBounds();
+
+              return Phaser.Rectangle.intersects(boundsA, boundsB);
+            }
+
 
             function preload(){
                 game.load.crossOrigin = "Anonymous";
@@ -114,11 +133,18 @@
                 game.load.image('cursor4', ASSET_URL + 'cursors/cursor4.png');
                 game.load.image('cursor5', ASSET_URL + 'cursors/cursor5.png');
 
+                game.load.image('coldPlace',  ASSET_URL + 'microbes/coldPlace.png');
+                game.load.image('monoPlace',  ASSET_URL + 'microbes/monoPlace.png');
+                game.load.image('measlesPlace',  ASSET_URL + 'microbes/measlesPlace.png');
+                game.load.image('sarsPlace',  ASSET_URL + 'microbes/sarsPlace.png');
+                game.load.image('herpesPlace',  ASSET_URL + 'microbes/herpesPlace.png');
+
               game.load.image('cold',  ASSET_URL + 'microbes/cold.png');
               game.load.image('mono',  ASSET_URL + 'microbes/mono.png');
               game.load.image('measles',  ASSET_URL + 'microbes/measles.png');
               game.load.image('sars',  ASSET_URL + 'microbes/sars.png');
               game.load.image('herpes',  ASSET_URL + 'microbes/herpes.png');
+
 
             }
 
@@ -147,38 +173,47 @@
                 game.camera.x = player.sprite.x - WINDOW_WIDTH/2;
                 game.camera.y = player.sprite.y - WINDOW_HEIGHT/2;
 
+                //add microbe places
+                coldPlace = game.add.sprite(750, 600, 'coldPlace');
+                monoPlace = game.add.sprite(600, 600, 'monoPlace');
+                herpesPlace = game.add.sprite(250, 600, 'herpesPlace');
+                sarsPlace = game.add.sprite(450, 600, 'sarsPlace');
+                measlesPlace = game.add.sprite(50, 600, 'measlesPlace');
+
                 //add microbes
 
-                var cold = game.add.sprite(100, 300, 'cold');
+                cold = game.add.sprite(100, 300, 'cold');
                 cold.inputEnabled = true;
                 cold.input.enableDrag(true);
 
 
-                var mono = game.add.sprite(300, 300, 'mono');
+                mono = game.add.sprite(300, 300, 'mono');
                 mono.inputEnabled = true;
                 mono.input.enableDrag(true);
 
-                var herpes = game.add.sprite(500, 300, 'herpes');
+                herpes = game.add.sprite(500, 300, 'herpes');
                 herpes.inputEnabled = true;
                 herpes.input.enableDrag(true);
 
-                var sars = game.add.sprite(650, 300, 'sars');
+                sars = game.add.sprite(650, 300, 'sars');
                 sars.inputEnabled = true;
                 sars.input.enableDrag(true);
 
-                var measles = game.add.sprite(850, 300, 'measles');
+                measles = game.add.sprite(850, 300, 'measles');
                 measles.inputEnabled = true;
                 measles.input.enableDrag(true);
+
+
 
                 //text
                 this.add.text(250, 100, 'Match the Microbe', { fontFamily: 'Press Start 2P', fill: '#ffffff', fontSize: '64px'  });
 
 
-                this.add.text(50, 400, 'measles', { fontFamily: "Press Start 2P", fill: '#ffffff' });
-                this.add.text(250, 400, 'herpes', { fontFamily: "Press Start 2P", fill: '#ffffff'   });
-                this.add.text(450, 400, 'sars', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
-                this.add.text(600, 400, 'mono', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
-                this.add.text(750, 400, 'common cold', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
+                this.add.text(50, 700, 'measles', { fontFamily: "Press Start 2P", fill: '#ffffff' });
+                this.add.text(250, 700, 'herpes', { fontFamily: "Press Start 2P", fill: '#ffffff'   });
+                this.add.text(450, 700, 'sars', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
+                this.add.text(600, 700, 'mono', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
+                this.add.text(750, 700, 'common cold', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
 
                 socket = io(); // This triggers the 'connection' event on the server
                 socket.emit('new-player',{x:player.sprite.x,y:player.sprite.y,angle:player.sprite.rotation,type:1})
@@ -252,6 +287,8 @@
                         p.rotation += dir * 0.16;
                     }
                 }
+
+            
 
 
             }
