@@ -77,26 +77,10 @@
                     this.sprite.x = game.input.mousePointer.x;
                     this.sprite.y = game.input.mousePointer.y;
 
-                    //this.sprite.y += this.speed_y;
+
 
                 this.speed_x *= this.friction;
                   this.speed_y *= this.friction;
-                    // Shoot bullet
-            /*        if(game.input.activePointer.leftButton.isDown && !this.shot){
-                        var speed_x = Math.cos(this.sprite.rotation + Math.PI/2) * 20;
-                        var speed_y = Math.sin(this.sprite.rotation + Math.PI/2) * 20;
-
-                        this.shot = true;
-
-                    }
-                    if(!game.input.activePointer.leftButton.isDown) this.shot = false;
-
-                    // To make player flash when they are hit, set player.spite.alpha = 0
-                    if(this.sprite.alpha < 1){
-                        this.sprite.alpha += (1 - this.sprite.alpha) * 0.16;
-                    } else {
-                        this.sprite.alpha = 1;
-                    } */
 
                     // Tell the server we've moved
                     socket.emit('move-player',{x:this.sprite.x,y:this.sprite.y,angle:this.sprite.rotation})
@@ -281,6 +265,11 @@
 
 
         </script>
+
+        <div>
+        <a href="https://tbdsbe.com/tests/TBDSTestCardPage-master/"> <img src="assets/rupert.gif" alt="Gif of rupert typing"> </a>
+
+        </div>
 
     </body>
 </html>
