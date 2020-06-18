@@ -53,6 +53,10 @@
             var sarsPlace;
             var herpesPlace;
 
+            var coldtext;
+
+            var prestelText;
+
 
             var WORLD_SIZE = {w:1024,h:800};
 
@@ -213,7 +217,10 @@
                 this.add.text(250, 700, 'herpes', { fontFamily: "Press Start 2P", fill: '#ffffff'   });
                 this.add.text(450, 700, 'sars', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
                 this.add.text(600, 700, 'mono', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
-                this.add.text(750, 700, 'common cold', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
+              coldtext =  game.add.text(750, 700, 'common cold', { fontFamily: "Press Start 2P", fill: '#ffffff'  });
+
+              prestelText = game.add.text(300, 300, 'prestel hack', { fontFamily: "Press Start 2P", fill: '#81E1D0',fontSize: '64px'  });
+              prestelText.visible = false;
 
                 socket = io(); // This triggers the 'connection' event on the server
                 socket.emit('new-player',{x:player.sprite.x,y:player.sprite.y,angle:player.sprite.rotation,type:1})
@@ -288,7 +295,42 @@
                     }
                 }
 
-            
+                if(checkOverlap(cold, coldPlace)){
+                  coldMatch = true;
+                  //coldtext.text = "match";
+                } else {
+                  coldMatch = false;
+                }
+
+                if(checkOverlap(herpes, herpesPlace)){
+                  herpesMatch = true;
+                } else {
+                  herpesMatch = false;
+                }
+
+                if(checkOverlap(mono, monoPlace)){
+                  monoMatch = true;
+                } else {
+                  monoMatch = false;
+                }
+
+                if(checkOverlap(sars, sarsPlace)){
+                  sarsMatch = true;
+                } else {
+                  sarsMatch = false;
+                }
+
+                if(checkOverlap(measles, measlesPlace)){
+                  measlesMatch = true;
+                } else {
+                  measlesMatch = false;
+                }
+
+                if(measlesMatch == true && sarsMatch == true && monoMatch == true && herpesMatch == true && coldMatch == true){
+                    prestelText.visible = true;
+                } else {
+                    prestelText.visible = false;
+                }
 
 
             }
